@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.myapplication.data.User
@@ -33,8 +35,10 @@ class InputUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.etAge.setText(sharedViewModel.user?.age ?: 0)
-        //binding.etName.setText(sharedViewModel.item?.name ?: "")
+        binding.etAge.setText(sharedViewModel.user?.age.toStringNumber())
+        binding.etName.setText(sharedViewModel.item?.name ?: "")
+
+        validateBtn()
 
         binding.btnNext.setOnClickListener {
             sharedViewModel.user = User(
@@ -43,5 +47,24 @@ class InputUserFragment : Fragment() {
             )
             (requireActivity() as SingleActivity).loadFragment(InputItemFragment.newInstance())
         }
+        binding.etName.doOnTextChanged { _, _, _, _ ->
+            validateBtn()
+        }
+        binding.etAge.doOnTextChanged { _, _, _, _ ->
+            validateBtn()
+        }
     }
+
+    private fun validateBtn() {
+        binding.apply {
+            btnNext.isVisible =
+                !(etAge.text.isNullOrEmpty() || etAge.text.toString() == "0") &&
+                        !(etName.text.isNullOrEmpty())
+        }
+    }
+
+    private fun Int?.toStringNumber(): String{
+        return if(this == null || this <= 0) "" else this.toString()
+    }
+
 }

@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Sukses Mengirim Data"
+                android:text="Success Send Data"
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/dmsansbold"
-            android:text="Kembali Ke Scan QR" />
+            android:text="Back to Main Screen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

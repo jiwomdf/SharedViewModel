@@ -37,27 +37,44 @@ class InputItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        validateBtn(null)
-        //binding.etName.setText(sharedViewModel.item?.name ?: "")
-        //binding.etCategory.setText(sharedViewModel.item?.category ?: "")
-        //binding.etQuantity.setText(sharedViewModel.item?.category ?: "")
+        binding.apply {
+            etName.setText(sharedViewModel.item?.name ?: "")
+            etCategory.setText(sharedViewModel.item?.category ?: "")
+            etQuantity.setText(sharedViewModel.item?.qty.toStringNumber())
 
-        binding.btnNext.setOnClickListener {
-            sharedViewModel.item = Item(
-                name = binding.etName.text.trim().toString(),
-                category = binding.etCategory.text.trim().toString(),
-                qty = binding.etQuantity.text.trim().toString().toIntOrNull() ?: 0
-            )
-            (requireActivity() as SingleActivity).loadFragment(ConfirmFragment.newInstance())
-        }
-        binding.etQuantity.doOnTextChanged { text, _, _, _ ->
-            validateBtn(text.toString())
+            validateBtn()
+
+            btnNext.setOnClickListener {
+                sharedViewModel.item = Item(
+                    name = binding.etName.text.trim().toString(),
+                    category = binding.etCategory.text.trim().toString(),
+                    qty = binding.etQuantity.text.trim().toString().toIntOrNull() ?: 0
+                )
+                (requireActivity() as SingleActivity).loadFragment(ConfirmFragment.newInstance())
+            }
+            binding.etName.doOnTextChanged { _, _, _, _ ->
+                validateBtn()
+            }
+            binding.etCategory.doOnTextChanged { _, _, _, _ ->
+                validateBtn()
+            }
+            binding.etQuantity.doOnTextChanged { _, _, _, _ ->
+                validateBtn()
+            }
         }
     }
 
-    private fun validateBtn(text: String?) {
-        binding.btnNext.isEnabled = !(text.isNullOrBlank() || text == "0")
-        binding.btnNext.isVisible = !(text.isNullOrBlank() || text == "0")
+    private fun validateBtn() {
+        binding.apply {
+            btnNext.isVisible =
+                    !(etQuantity.text.isNullOrEmpty() || etQuantity.text.toString() == "0") &&
+                    !(etName.text.isNullOrEmpty()) &&
+                    !(etCategory.text.isNullOrEmpty())
+        }
+    }
+
+    private fun Int?.toStringNumber(): String{
+        return if(this == null || this <= 0) "" else this.toString()
     }
 
 }

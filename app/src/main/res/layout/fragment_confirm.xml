@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="@font/dmsansbold"
-        android:text="Konfirmasi"
+        android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
