@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.singleactivity.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.myapplication.singleactivity.SingleViewModel
+import com.example.myapplication.successactivity.SuccessActivity
 import com.example.myapplication.databinding.FragmentConfirmBinding
-import com.example.myapplication.databinding.FragmentInputBinding
 
 class ConfirmFragment : Fragment() {
 
@@ -21,10 +22,6 @@ class ConfirmFragment : Fragment() {
     lateinit var binding: FragmentConfirmBinding
     private val sharedViewModel by activityViewModels<SingleViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,9 +33,11 @@ class ConfirmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvName.text = sharedViewModel.data?.name ?: ""
-        binding.tvCategory.text = sharedViewModel.data?.category ?: ""
-        binding.tvQuantity.text = "Quantity ${sharedViewModel.data?.qty}"
+        binding.tvUserName.text = sharedViewModel.user?.name ?: ""
+        binding.tvUserAge.text = (sharedViewModel.user?.age ?: 0).toString()
+        binding.tvItemName.text = sharedViewModel.item?.name ?: ""
+        binding.tvCategory.text = sharedViewModel.item?.category ?: ""
+        binding.tvQuantity.text = "Quantity ${sharedViewModel.item?.qty}"
         binding.btnNext.setOnClickListener {
             startActivity(Intent(requireContext(), SuccessActivity::class.java))
             requireActivity().finish()

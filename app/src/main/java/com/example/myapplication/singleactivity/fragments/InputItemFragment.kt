@@ -1,6 +1,7 @@
-package com.example.myapplication
+package com.example.myapplication.singleactivity.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +9,20 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.myapplication.databinding.FragmentInputBinding
+import com.example.myapplication.data.Item
+import com.example.myapplication.singleactivity.SingleViewModel
+import com.example.myapplication.databinding.FragmentInputItemBinding
+import com.example.myapplication.singleactivity.SingleActivity
 
-class InputFragment : Fragment() {
+class InputItemFragment : Fragment() {
 
     companion object {
-        fun newInstance(): InputFragment {
-            return InputFragment()
+        fun newInstance(): InputItemFragment {
+            return InputItemFragment()
         }
     }
 
-    lateinit var binding: FragmentInputBinding
+    lateinit var binding: FragmentInputItemBinding
     private val sharedViewModel by activityViewModels<SingleViewModel>()
 
     override fun onCreateView(
@@ -26,7 +30,7 @@ class InputFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentInputBinding.inflate(layoutInflater)
+        binding = FragmentInputItemBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -34,14 +38,19 @@ class InputFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         validateBtn(null)
-        binding.tvName.text = sharedViewModel.data?.name ?: ""
-        binding.tvCategory.text = sharedViewModel.data?.category ?: ""
+        //binding.etName.setText(sharedViewModel.item?.name ?: "")
+        //binding.etCategory.setText(sharedViewModel.item?.category ?: "")
+        //binding.etQuantity.setText(sharedViewModel.item?.category ?: "")
 
         binding.btnNext.setOnClickListener {
-            sharedViewModel.data?.qty = binding.etQuantity.text.trim().toString().toIntOrNull() ?: 0
+            sharedViewModel.item = Item(
+                name = binding.etName.text.trim().toString(),
+                category = binding.etCategory.text.trim().toString(),
+                qty = binding.etQuantity.text.trim().toString().toIntOrNull() ?: 0
+            )
             (requireActivity() as SingleActivity).loadFragment(ConfirmFragment.newInstance())
         }
-        binding.etQuantity.doOnTextChanged { text, start, before, count ->
+        binding.etQuantity.doOnTextChanged { text, _, _, _ ->
             validateBtn(text.toString())
         }
     }

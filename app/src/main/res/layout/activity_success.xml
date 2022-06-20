@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/green_900"
     android:orientation="vertical"
-    tools:context=".DetailFragment">
+    tools:context=".singleactivity.fragments.InputUserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

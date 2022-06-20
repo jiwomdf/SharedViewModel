@@ -5,25 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_900"
-    tools:context=".InputFragment">
+    tools:context=".singleactivity.fragments.InputItemFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_item"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="32dp"
         android:layout_marginStart="16dp"
-        android:orientation="vertical">
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Biscuit Tanggo Coklat"
+            android:text="Input User Data"
             android:textColor="@color/white"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,47 +31,58 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Makanan"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <EditText
-        android:id="@+id/et_quantity"
-        android:background="@drawable/btn_border_light_with_radius"
-        android:layout_width="wrap_content"
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:inputType="number"
+        android:layout_marginEnd="16dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/btn_border_light_with_radius"
+        android:hint="Input User Name"
+        android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:hint="Tolong masukan quantity barang"
-        app:layout_constraintTop_toBottomOf="@id/ll_item"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_item" />
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_border_light_with_radius"
+        android:hint="Input User Age"
+        android:inputType="number"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
+        style="@style/ButtonBorderLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="16dp"
         android:fontFamily="@font/dmsansbold"
-        style="@style/ButtonBorderLight"
-        android:text="Selanjutnya" />
+        android:text="Selanjutnya"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

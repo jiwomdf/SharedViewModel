@@ -1,10 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.singleactivity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.myapplication.singleactivity.fragments.InputUserFragment
+import com.example.myapplication.R
+import com.example.myapplication.data.Item
 import com.example.myapplication.databinding.ActivitySingleBinding
 
 class SingleActivity: AppCompatActivity(){
@@ -17,21 +19,7 @@ class SingleActivity: AppCompatActivity(){
         binding = ActivitySingleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if((intent.getStringExtra("id") ?: "") == "1"){
-            viewModel.data = Data(
-                name = "Biscuit Tanggo Coklat",
-                category = "Makanan",
-                qty = 0
-            )
-        } else if((intent.getStringExtra("id") ?: "") == "2") {
-            viewModel.data = Data(
-                name = "Fruity Blackcurrant 550",
-                category = "Minuman",
-                qty = 0
-            )
-        }
-
-        loadFragment(DetailFragment.newInstance())
+        loadFragment(InputUserFragment.newInstance())
 
         binding.ivBack.setOnClickListener {
             if (supportFragmentManager.backStackEntryCount > 1) {
