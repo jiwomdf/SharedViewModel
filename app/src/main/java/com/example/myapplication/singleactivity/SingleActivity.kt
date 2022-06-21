@@ -1,23 +1,35 @@
 package com.example.myapplication.singleactivity
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.singleactivity.fragments.InputUserFragment
 import com.example.myapplication.R
 import com.example.myapplication.data.Item
+import com.example.myapplication.data.User
 import com.example.myapplication.databinding.ActivitySingleBinding
 
 class SingleActivity: AppCompatActivity(){
 
+    companion object {
+        private const val USER = "USER"
+        private const val ITEM = "ITEM"
+    }
+
     lateinit var binding: ActivitySingleBinding
-    private val viewModel by viewModels<SingleViewModel>()
+    private val sharedViewModel by viewModels<SingleViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySingleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(savedInstanceState != null){
+            sharedViewModel.user = savedInstanceState.getParcelable(USER)
+            sharedViewModel.item = savedInstanceState.getParcelable(ITEM)
+        }
 
         loadFragment(InputUserFragment.newInstance())
 
@@ -28,6 +40,12 @@ class SingleActivity: AppCompatActivity(){
                 finish()
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putParcelable(USER, sharedViewModel.user)
+        outState.putParcelable(ITEM, sharedViewModel.item)
     }
 
     fun setTitle(title: String) {
