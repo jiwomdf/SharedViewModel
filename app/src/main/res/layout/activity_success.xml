@@ -55,7 +55,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/dmsansbold"
-            android:text="Back to Main Screen" />
+            android:text="Close the App" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
